@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import React from 'react';
 import './App.css';
 import ApplicationTracker from "./components/ApplicationTracker";
@@ -23,7 +22,7 @@ class App extends React.Component{
     return (
         <div className="App">
           <ApplicationTracker />
-          <p>{this.callAPI()}</p>
+          <p>{this.state.apiResponse}</p>
         </div>
     );
   }
