@@ -8,7 +8,36 @@ body {
 }
 
 /**HEADER**/
-
 .header {
-  background-color: black;
+  background-color: dodgerblue;
+  padding: 2em;
+  text-align: left;
+  margin-bottom: 2em;
+}
+
+.header h1 {
+  font-weight: bold;
+}
+
+.header button {
+  position: absolute;
+  left: 93%;
+  top: 2.5em;
+}
+
+.landingPageInfo {
+  text-align: center;
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
+.signedOutHome {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.signedOutHome button {
+  margin-left: 1em;
+  margin-right: 1em;
 }

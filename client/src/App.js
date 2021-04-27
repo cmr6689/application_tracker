@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import ApplicationTracker from "./components/ApplicationTracker";
+import Header from "./components/Header";
 
 class App extends React.Component{
   constructor(props) {
@@ -8,7 +8,7 @@ class App extends React.Component{
     this.state = { apiResponse: "" };
   }
 
-  callAPI() {
+  /*callAPI() {
     fetch("http://localhost:9000/api/users")
         .then(res => res.json())
         .then(data => {
@@ -21,17 +21,16 @@ class App extends React.Component{
             list.appendChild(listItem);
           }
         });
-  }
+  }*/
 
   componentWillMount() {
-    this.callAPI();
+    //this.callAPI();
   }
 
   render() {
     return (
         <div className="App">
-          <ApplicationTracker />
-          <ul> </ul>
+          <Header />
         </div>
     );
   }
