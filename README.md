@@ -5,7 +5,7 @@
 - ```git clone https://github.com/cmr6689/application_tracker.git```
 - ```git checkout main```
 - ```cd application_tracker/```
-- ```cd api/
+- ```cd api/```
 - ```npm install```
 - ```npm start```
 - ```cd ../client/```
