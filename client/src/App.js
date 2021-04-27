@@ -10,8 +10,17 @@ class App extends React.Component{
 
   callAPI() {
     fetch("http://localhost:9000/api/users")
-        .then(res => res.text())
-        .then(res => this.setState({ apiResponse: res }));
+        .then(res => res.json())
+        .then(data => {
+          const list = document.querySelector('ul');
+          for (const user of data.data) {
+            let listItem = document.createElement('li');
+            listItem.appendChild(
+                document.createElement('strong')
+            ).textContent = user.name + ": " + user.email;
+            list.appendChild(listItem);
+          }
+        });
   }
 
   componentWillMount() {
@@ -22,7 +31,7 @@ class App extends React.Component{
     return (
         <div className="App">
           <ApplicationTracker />
-          <p>{this.state.apiResponse}</p>
+          <ul> </ul>
         </div>
     );
   }

@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
-const db = require('../database.js');
+const db = require('../database');
 
-router.get("/api/users", (req, res, next) => {
+router.get("/", (req, res, next) => {
     var sql = "select * from user";
     var params = [];
     db.all(sql, params, (err, rows) => {
@@ -10,13 +10,10 @@ router.get("/api/users", (req, res, next) => {
             res.status(400).json({"error":err.message});
             return 0;
         }
-        /*res.json({
+        res.json({
             "message":"success",
             "data":rows
-        });*/
-        rows.forEach((row) => {
-            console.log(row.name);
-        })
+        });
     });
 });
 

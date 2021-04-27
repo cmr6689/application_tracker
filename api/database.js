@@ -1,16 +1,7 @@
 var sqlite3 = require('sqlite3').verbose();
 var md5 = require('md5');
-var db = new sqlite3.Database(":memory:");
 
-db.serialize(() => {
-    db.run("CREATE TABLE user (id INTEGER PRIMARY KEY AUTOINCREMENT, name text, email text UNIQUE, password text, CONSTRAINT email_unique UNIQUE (email))");
-    var stmt = db.prepare('INSERT INTO user (name, email, password) VALUES (?, ?, ?)');
-    stmt.run(['admin', 'admin@exampole.com', md5('admin123')]);
-});
-
-db.close();
-
-/*const DBSOURCE = 'db.sqlite';
+const DBSOURCE = 'db.sqlite';
 
 let db = new sqlite3.Database(DBSOURCE, (err) => {
     if (err) {
@@ -30,6 +21,6 @@ let db = new sqlite3.Database(DBSOURCE, (err) => {
             }
           });
     }
-});*/
+});
 
 module.exports = db;
