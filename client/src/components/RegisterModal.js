@@ -125,6 +125,7 @@ export default class RegisterModal extends React.Component {
         if (valid === 4) {
             this.addUser();
             this.toggle();
+            this.props.setState({username: this.state.username});
             this.props.showComponent("signedIn");
         }
     }

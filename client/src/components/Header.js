@@ -8,10 +8,12 @@ export default class Header extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            signedIn: false
+            signedIn: false,
+            username: ''
         }
 
         this.showComponent = this.showComponent.bind(this);
+        this.getUsername = this.getUsername.bind(this);
     }
 
     showComponent(name) {
@@ -34,6 +36,10 @@ export default class Header extends React.Component {
         }
     }
 
+    getUsername(name) {
+        this.setState({username: name});
+    }
+
     render() {
         return (
             <div>
@@ -47,10 +53,10 @@ export default class Header extends React.Component {
                         </div>
                         <div className='signedOutHome'>
                             <div>
-                                <LoginModal showComponent={this.showComponent}/>
+                                <LoginModal showComponent={this.showComponent} sendUsername={this.getUsername}/>
                             </div>
                             <div>
-                                <RegisterModal showComponent={this.showComponent}/>
+                                <RegisterModal showComponent={this.showComponent} sendUsername={this.getUsername}/>
                             </div>
                         </div>
                     </div>
@@ -61,7 +67,7 @@ export default class Header extends React.Component {
                             <h1>Application Tracker</h1>
                             <Button color='secondary' onClick={() => this.hideComponent('signedIn')}>Logout</Button>
                         </div>
-                        <ApplicationTracker />
+                        <ApplicationTracker username={this.state.username}/>
                     </div>
                 )}
             </div>

@@ -66,6 +66,7 @@ export default class LoginModal extends React.Component {
             if (this.usernames[iterator] === this.state.username && this.passwords[iterator] === this.state.password) {
                 valid = true;
                 this.toggle();
+                this.props.sendUsername(this.state.username);
                 this.props.showComponent('signedIn');
             }
             iterator++;

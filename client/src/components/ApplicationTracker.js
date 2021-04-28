@@ -46,7 +46,7 @@ export default class ApplicationTracker extends React.Component {
                         }}>Submit</button>
                     </form>
                 )}
-                <h2>Applications:</h2>
+                <h2>{this.props.username}'s Applications:</h2>
 
             </div>
         )
