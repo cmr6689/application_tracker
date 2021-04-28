@@ -9,15 +9,15 @@ let db = new sqlite3.Database(DBSOURCE, (err) => {
         throw err;
     } else {
         console.log('Connected to the SQLite DB.');
-        db.run("CREATE TABLE user (id INTEGER PRIMARY KEY AUTOINCREMENT, name text, email text UNIQUE, password text, CONSTRAINT email_unique UNIQUE (email))",
+        db.run("CREATE TABLE user (id INTEGER PRIMARY KEY AUTOINCREMENT, username text, email text, password text)",
           (err) => {
             if (err) {
                 //table already created
             } else {
                 //table just created, create some rows
-                var insert = 'INSERT INTO user (name, email, password) VALUES (?, ?, ?)';
+                var insert = 'INSERT INTO user (username, email, password) VALUES (?, ?, ?)';
                 db.run(insert, ['admin', 'admin@example.com', md5('admin123456')]);
-                db.run(insert, ['guest', 'guest@example.com', md5('guest123')]);
+                db.run(insert, ['user', 'user@example.com', md5('user123')]);
             }
           });
     }
