@@ -35,8 +35,6 @@ export default class LoginModal extends React.Component {
                     this.passwords.push(user.password);
                 }
             });
-        console.log(this.usernames);
-        console.log(this.passwords);
     }
 
     componentDidMount() {

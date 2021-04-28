@@ -46,10 +46,17 @@ export default class RegisterModal extends React.Component {
         const putBody = {
             username: this.state.username,
             email: this.state.email,
-            password: this.state.email
+            password: this.state.password
         }
-        fetch("http://localhost:9000/api/addUser", {method: 'PUT'})
-            .then(res => res.json())
+        console.log(JSON.stringify(putBody));
+        fetch("http://localhost:9000/api/addUser", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(putBody)
+        })
+            .then(req => req.json())
     }
 
     componentDidMount() {
@@ -116,7 +123,7 @@ export default class RegisterModal extends React.Component {
         }
         //All fields valid
         if (valid === 4) {
-            //this.addUser();
+            this.addUser();
             this.toggle();
             this.props.showComponent("signedIn");
         }
