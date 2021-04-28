@@ -1,5 +1,4 @@
-var sqlite3 = require('sqlite3').verbose();
-var md5 = require('md5');
+const sqlite3 = require('sqlite3').verbose();
 
 const DBSOURCE = 'db.sqlite';
 
@@ -15,9 +14,9 @@ let db = new sqlite3.Database(DBSOURCE, (err) => {
                 //table already created
             } else {
                 //table just created, create some rows
-                var insert = 'INSERT INTO user (username, email, password) VALUES (?, ?, ?)';
-                db.run(insert, ['admin', 'admin@example.com', md5('admin123456')]);
-                db.run(insert, ['user', 'user@example.com', md5('user123')]);
+                const insert = 'INSERT INTO user (username, email, password) VALUES (?, ?, ?)';
+                db.run(insert, ['admin', 'admin@example.com', 'admin123456']);
+                db.run(insert, ['user', 'user@example.com', 'user123']);
             }
           });
     }

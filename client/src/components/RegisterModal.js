@@ -13,8 +13,8 @@ import {
 } from 'reactstrap';
 
 export default class RegisterModal extends React.Component {
-    emails = [];
     usernames = [];
+    emails = [];
 
     constructor(props) {
         super(props);
@@ -28,7 +28,6 @@ export default class RegisterModal extends React.Component {
             usernameTaken: false,
             passwordNotSecure: false,
             passwordsDifferent: false,
-            blank: false
         }
     }
 
@@ -41,8 +40,16 @@ export default class RegisterModal extends React.Component {
                     this.emails.push(user.email);
                 }
             });
-        console.log(this.emails);
-        console.log(this.usernames);
+    }
+
+    addUser() {
+        const putBody = {
+            username: this.state.username,
+            email: this.state.email,
+            password: this.state.email
+        }
+        fetch("http://localhost:9000/api/addUser", {method: 'PUT'})
+            .then(res => res.json())
     }
 
     componentDidMount() {
@@ -69,39 +76,47 @@ export default class RegisterModal extends React.Component {
 
     validateForm() {
         let valid = 0;
+        //Check for blank fields
         if (this.state.email === '' && this.state.username === '') {
             alert("Please fill in all fields!");
             return;
         }
+        //Check for valid email address
         if (!this.state.email.includes('@') || !this.state.email.includes('.')) {
             alert("Please enter a valid email address.");
             return;
         }
+        //Check if email already registered
         if (this.emails.includes(this.state.email)) {
             this.setState({emailTaken: true});
         } else {
             this.setState({emailTaken: false});
             valid++;
         }
+        //Check if username available
         if (this.usernames.includes(this.state.username)) {
             this.setState({usernameTaken: true});
         } else {
             this.setState({usernameTaken: false});
             valid++;
         }
+        //Check if password is long enough
         if (this.state.password.length < 8) {
             this.setState({passwordNotSecure: true});
         } else {
             this.setState({passwordNotSecure: false});
             valid++;
         }
+        //Check matching passwords
         if (this.state.confirmPass !== this.state.password) {
             this.setState({passwordsDifferent: true});
         } else {
             this.setState({passwordsDifferent: false});
             valid++;
         }
+        //All fields valid
         if (valid === 4) {
+            //this.addUser();
             this.toggle();
             this.props.showComponent("signedIn");
         }
