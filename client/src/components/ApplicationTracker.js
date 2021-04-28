@@ -30,7 +30,6 @@ export default class ApplicationTracker extends React.Component {
     }
 
     render() {
-        const {addApplication} = this.state;
         return (
             <div className='applicationTracker'>
                 <AddApplicationModal />

@@ -9,7 +9,6 @@ import {
     Input,
     Label,
     ModalHeader,
-    FormFeedback
 } from 'reactstrap';
 
 export default class LoginModal extends React.Component {
