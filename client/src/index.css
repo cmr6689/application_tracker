@@ -41,3 +41,13 @@ body {
   margin-left: 1em;
   margin-right: 1em;
 }
+
+/**APPLICATION TRACKER**/
+.applicationTracker {
+  margin-left: 2em;
+  margin-right: 2em;
+}
+
+.applicationTracker h2 {
+  text-align: left;
+}

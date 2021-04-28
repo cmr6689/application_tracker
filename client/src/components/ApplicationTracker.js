@@ -1,4 +1,5 @@
 import React from 'react';
+import AddApplicationModal from "./AddApplicationModal";
 
 export default class ApplicationTracker extends React.Component {
     constructor(props) {
@@ -31,23 +32,9 @@ export default class ApplicationTracker extends React.Component {
     render() {
         const {addApplication} = this.state;
         return (
-            <div>
-                <h1>Application Tracker</h1>
-                <button onClick={() => this.showComponent('addApplication')}>Add Application</button>
-                {addApplication && (
-                    <form>
-                        <title>Application</title>
-                        <label for='company'>Company:</label>
-                        <input type='text' id='company' name='company' />
-                        <label for='title'>Job Title</label>
-                        <input type='text' id='title' name='title' />
-                        <button onClick={() => {
-                            this.hideComponent('addApplication')
-                        }}>Submit</button>
-                    </form>
-                )}
+            <div className='applicationTracker'>
+                <AddApplicationModal />
                 <h2>{this.props.username}'s Applications:</h2>
-
             </div>
         )
     }
