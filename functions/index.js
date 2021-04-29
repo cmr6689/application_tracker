@@ -2,15 +2,8 @@ const functions = require("firebase-functions");
 const firebase = require('firebase');
 require('firebase/firestore');
 const firebaseConfig = {
-    apiKey: "AIzaSyC01CSvEjPEmhjP7ZW4OHRB2b_QBL0vuus",
-    authDomain: "application-tracker-cmr6689.firebaseapp.com",
-    databaseURL: "https://application-tracker-cmr6689-default-rtdb.firebaseio.com",
-    projectId: "application-tracker-cmr6689",
-    storageBucket: "application-tracker-cmr6689.appspot.com",
-    messagingSenderId: "226125838970",
-    appId: "1:226125838970:web:580cba205a50cebb6fd9c3",
-    measurementId: "G-8E8DW0HPTY"
-};
+    //REMOVED FOR PRIVACY
+}
 firebase.initializeApp(firebaseConfig);
 
 const express = require('express');
