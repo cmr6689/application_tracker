@@ -10,7 +10,7 @@ export default class ApplicationTracker extends React.Component {
             addApplication: false,
             applications: [],
         }
-        this.addApplication = this.addApplication.bind(this);
+        this.update = this.update.bind(this);
     }
 
     callAPI() {
@@ -20,7 +20,7 @@ export default class ApplicationTracker extends React.Component {
                 for (const app of data.data) {
                     if (app.username === this.props.username) {
                         this.setState({
-                            applications: [...this.state.applications, <Application applicationInformation={app} />],
+                            applications: [...this.state.applications, <Application applicationInformation={app} username={this.props.username} update={this.update} />],
                         });
                     }
                 }
@@ -31,16 +31,15 @@ export default class ApplicationTracker extends React.Component {
         this.callAPI();
     }
 
-    addApplication(state) {
-        this.setState({
-            applications: [...this.state.applications, <Application applicationInformation={state} />],
-        });
+    update() {
+        this.setState({applications: []});
+        setTimeout(() => this.callAPI(), 100);
     }
 
     render() {
         return (
             <div className='applicationTracker'>
-                <AddApplicationModal addApplication={this.addApplication} username={this.props.username}/>
+                <AddApplicationModal username={this.props.username} update={this.update}/>
                 <h2>{this.props.username}'s Applications:</h2>
                 {this.state.applications}
             </div>

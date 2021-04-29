@@ -1,6 +1,6 @@
 import React from 'react';
-import {Button} from "reactstrap";
 import StatusModal from "./StatusModal";
+import RemoveApplicationModal from "./RemoveApplicationModal";
 
 export default class Application extends React.Component {
 
@@ -9,6 +9,28 @@ export default class Application extends React.Component {
         this.state = {
             status: ''
         }
+        this.deleteApplication = this.deleteApplication.bind(this);
+    }
+
+    call() {
+        const putBody = {
+            username: this.props.username,
+            jobTitle: this.props.applicationInformation.jobTitle,
+            company: this.props.applicationInformation.company
+        }
+        fetch("http://localhost:9000/api/removeApplication", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(putBody)
+        })
+            .then(req => req.json());
+    }
+
+    deleteApplication() {
+        this.call();
+        this.props.update();
     }
 
     render() {
@@ -23,7 +45,7 @@ export default class Application extends React.Component {
                     <br /><br />
                     <StatusModal status={this.props.applicationInformation.status} updateStatus={this.updateStatus}/>
                 </div>
-                <Button color='danger' size='sm' className='deleteApplication'>X</Button>
+                <RemoveApplicationModal deleteApplication={this.deleteApplication} />
             </div>
         )
     }

@@ -64,7 +64,7 @@ export default class AddApplicationModal extends React.Component {
         } else {
             this.toggle();
             this.addApplication();
-            this.props.addApplication(this.state);
+            this.props.update();
         }
     }
 
@@ -74,7 +74,7 @@ export default class AddApplicationModal extends React.Component {
             <div>
                 <Button color="primary" size='lg' onClick={() => this.toggle()}>Add Application</Button>
                 <Modal isOpen={modal} toggle={() => this.toggle()} className='addApplicationModal'>
-                    <ModalHeader>Sign In</ModalHeader>
+                    <ModalHeader>New Job Application</ModalHeader>
                     <ModalBody>
                         <Form>
                             <FormGroup>

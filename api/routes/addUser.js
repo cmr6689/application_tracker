@@ -4,8 +4,8 @@ const db = require('../database');
 
 router.post("/", (req, res, next) => {
     const insert = 'INSERT INTO user (username, email, password) VALUES (?, ?, ?)';
-    console.log(req.body);
     db.run(insert, [req.body.username, req.body.email, req.body.password]);
+    console.log("POST /api/addUser");
 });
 
 module.exports = router;

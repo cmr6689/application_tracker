@@ -10,6 +10,7 @@ var getUsers = require("./routes/getUsers");
 var addUser = require("./routes/addUser");
 var getApplications = require('./routes/getApplications');
 var addApplication = require('./routes/addApplication');
+var removeApplication = require('./routes/removeApplication');
 var app = express();
 
 // view engine setup
@@ -29,6 +30,7 @@ app.use("/api/users", getUsers);
 app.use('/api/addUser', addUser);
 app.use('/api/applications', getApplications);
 app.use('/api/addApplication', addApplication);
+app.use('/api/removeApplication', removeApplication);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
