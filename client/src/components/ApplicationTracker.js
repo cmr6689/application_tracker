@@ -3,17 +3,20 @@ import AddApplicationModal from "./AddApplicationModal";
 import Application from "./Application";
 
 export default class ApplicationTracker extends React.Component {
+
     constructor(props) {
         super(props);
         this.state = {
             addApplication: false,
-            applications: [],
+            applications: []
         }
         this.addApplication = this.addApplication.bind(this);
     }
 
     addApplication(state) {
-        this.setState({applications: [...this.state.applications, <Application applicationInformation={state} />]})
+        this.setState({
+            applications: [...this.state.applications, <Application applicationInformation={state} />],
+        });
     }
 
     render() {
