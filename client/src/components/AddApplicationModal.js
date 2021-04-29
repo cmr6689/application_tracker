@@ -17,6 +17,25 @@ export default class AddApplicationModal extends React.Component {
         this.setState({modal: !this.state.modal});
     }
 
+    addApplication() {
+        const putBody = {
+            username: this.props.username,
+            jobTitle: this.state.jobTitle,
+            company: this.state.company,
+            notes: this.state.notes,
+            status: this.state.status
+        }
+        console.log(JSON.stringify(putBody));
+        fetch("http://localhost:9000/api/addApplication", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(putBody)
+        })
+            .then(req => req.json());
+    }
+
     onChangeHandler = (event) => {
         let name = event.target.name;
         let input = event.target.value;
@@ -44,6 +63,7 @@ export default class AddApplicationModal extends React.Component {
             alert("Please fill in all fields!");
         } else {
             this.toggle();
+            this.addApplication();
             this.props.addApplication(this.state);
         }
     }

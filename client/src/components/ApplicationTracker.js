@@ -40,7 +40,7 @@ export default class ApplicationTracker extends React.Component {
     render() {
         return (
             <div className='applicationTracker'>
-                <AddApplicationModal addApplication={this.addApplication} />
+                <AddApplicationModal addApplication={this.addApplication} username={this.props.username}/>
                 <h2>{this.props.username}'s Applications:</h2>
                 {this.state.applications}
             </div>
