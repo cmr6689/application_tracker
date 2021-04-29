@@ -8,7 +8,7 @@ export default class ApplicationTracker extends React.Component {
         super(props);
         this.state = {
             addApplication: false,
-            applications: []
+            applications: [],
         }
         this.addApplication = this.addApplication.bind(this);
     }
