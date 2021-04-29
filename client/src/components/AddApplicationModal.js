@@ -44,7 +44,7 @@ export default class AddApplicationModal extends React.Component {
             alert("Please fill in all fields!");
         } else {
             this.toggle();
-            this.props.sendState(this.state);
+            this.props.addApplication(this.state);
         }
     }
 
