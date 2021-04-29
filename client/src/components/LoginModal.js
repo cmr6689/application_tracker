@@ -26,7 +26,7 @@ export default class LoginModal extends React.Component {
     }
 
     callAPI() {
-        fetch("http://localhost:9000/api/users")
+        fetch("https://application-tracker-cmr6689.web.app/api/users")
             .then(res => res.json())
             .then(data => {
                 for (const user of data.data) {

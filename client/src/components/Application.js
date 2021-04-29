@@ -19,7 +19,7 @@ export default class Application extends React.Component {
             jobTitle: this.props.applicationInformation.jobTitle,
             company: this.props.applicationInformation.company
         }
-        await fetch("http://localhost:9000/api/removeApplication", {
+        await fetch("https://application-tracker-cmr6689.web.app/api/removeApplication", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

@@ -14,7 +14,7 @@ export default class ApplicationTracker extends React.Component {
     }
 
     callAPI() {
-        fetch("http://localhost:9000/api/applications")
+        fetch("https://application-tracker-cmr6689.web.app/api/applications")
             .then(res => res.json())
             .then(data => {
                 for (const app of data.data) {

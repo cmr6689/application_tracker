@@ -1,0 +1,40 @@
+{
+  "hosting": {
+    "public": "build",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "/",
+        "destination": "/index.html"
+      },
+      {
+        "source": "/api/users",
+        "function": "api"
+      },
+      {
+        "source": "/api/addUser",
+        "function": "api"
+      },
+      {
+        "source": "/api/applications",
+        "function": "api"
+      },
+      {
+        "source": "/api/addApplication",
+        "function": "api"
+      },
+      {
+        "source": "/api/removeApplication",
+        "function": "api"
+      },
+      {
+        "source": "/api/updateStatus",
+        "function": "api"
+      }
+    ]
+  }
+}

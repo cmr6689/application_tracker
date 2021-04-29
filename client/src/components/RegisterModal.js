@@ -32,7 +32,7 @@ export default class RegisterModal extends React.Component {
     }
 
     callAPI() {
-        fetch("http://localhost:9000/api/users")
+        fetch("https://application-tracker-cmr6689.web.app/api/users")
             .then(res => res.json())
             .then(data => {
                 for (const user of data.data) {
@@ -48,7 +48,7 @@ export default class RegisterModal extends React.Component {
             email: this.state.email,
             password: this.state.password
         }
-        await fetch("http://localhost:9000/api/addUser", {
+        await fetch("https://application-tracker-cmr6689.web.app/api/addUser", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

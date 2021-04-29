@@ -57,7 +57,7 @@ export default class StatusModal extends React.Component {
             jobTitle: this.props.applicationInformation.jobTitle,
             company: this.props.applicationInformation.company
         }
-        await fetch("http://localhost:9000/api/updateStatus", {
+        await fetch("https://application-tracker-cmr6689.web.app/api/updateStatus", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

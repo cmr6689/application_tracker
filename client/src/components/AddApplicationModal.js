@@ -25,14 +25,13 @@ export default class AddApplicationModal extends React.Component {
             notes: this.state.notes,
             status: this.state.status
         }
-        await fetch("http://localhost:9000/api/addApplication", {
+        await fetch("https://application-tracker-cmr6689.web.app/api/addApplication", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(putBody)
         });
-        this.props.update();
     }
 
     onChangeHandler = (event) => {
@@ -63,6 +62,7 @@ export default class AddApplicationModal extends React.Component {
         } else {
             this.toggle();
             await this.addApplication();
+            this.props.update();
         }
     }
 
