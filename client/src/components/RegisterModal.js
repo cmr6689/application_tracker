@@ -125,7 +125,7 @@ export default class RegisterModal extends React.Component {
         if (valid === 4) {
             this.addUser();
             this.toggle();
-            this.props.setState({username: this.state.username});
+            this.props.sendUsername(this.state.username);
             this.props.showComponent("signedIn");
         }
     }
@@ -145,6 +145,7 @@ export default class RegisterModal extends React.Component {
                                     <Input type='email' name='email' id='registerEmail' onChange={this.onChangeHandler} />
                                 </FormGroup>
                             )}
+
                             {this.state.emailTaken && (
                                 <FormGroup>
                                     <Label for='registerEmail'>Email Address</Label>
