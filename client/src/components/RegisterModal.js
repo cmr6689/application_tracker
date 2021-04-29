@@ -84,7 +84,7 @@ export default class RegisterModal extends React.Component {
     validateForm() {
         let valid = 0;
         //Check for blank fields
-        if (this.state.email === '' && this.state.username === '') {
+        if (this.state.email === '' || this.state.username === '') {
             alert("Please fill in all fields!");
             return;
         }

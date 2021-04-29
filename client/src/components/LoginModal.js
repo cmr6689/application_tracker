@@ -55,7 +55,7 @@ export default class LoginModal extends React.Component {
     }
 
     validateForm() {
-        if (this.state.password === '' && this.state.username === '') {
+        if (this.state.password === '' || this.state.username === '') {
             alert("Please fill in all fields!");
             return;
         }

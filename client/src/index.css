@@ -9,7 +9,7 @@ body {
 
 /**HEADER**/
 .header {
-  background-color: dodgerblue;
+  background-image: linear-gradient(to right, dodgerblue, lightblue);
   padding: 2em;
   text-align: left;
   margin-bottom: 2em;
@@ -50,4 +50,37 @@ body {
 
 .applicationTracker h2 {
   text-align: left;
+}
+
+.application {
+  position: relative;
+  border: 2px solid black;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  padding-top: 2em;
+  padding-bottom: 2em;
+}
+
+.application > * {
+  margin-left: 2em;
+  margin-right: 2em;
+}
+
+.application span {
+  align-self: flex-start;
+}
+
+.application .deleteApplication {
+  margin-right: 1em;
+  margin-top: 1em;
+}
+
+.deleteApplication {
+  position: absolute;
+  right: 0;
+  top: 0;
 }

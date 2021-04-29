@@ -1,11 +1,15 @@
 import React from 'react';
-import {Button, Form, FormGroup, Input, Label, Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap";
+import {Button, Form, FormGroup, FormText, Input, Label, Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap";
 
 export default class AddApplicationModal extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             modal: false,
+            company: '',
+            jobTitle: '',
+            notes: '',
+            status: 'In Review'
         }
     }
 
@@ -16,10 +20,31 @@ export default class AddApplicationModal extends React.Component {
     onChangeHandler = (event) => {
         let name = event.target.name;
         let input = event.target.value;
-        if (name === 'company') {
-            this.setState({username: input});
-        } else if (name === 'jobTitle') {
-            this.setState({password: input});
+        switch(name) {
+            case 'company':
+                this.setState({company: input});
+                break;
+            case 'jobTitle':
+                this.setState({jobTitle: input});
+                break;
+            case 'notes':
+                this.setState({notes: input});
+                break;
+            case 'status':
+                this.setState({status: input});
+                break;
+            default:
+                this.setState(this.state);
+        }
+    }
+
+    validateForm() {
+        //Check for blank fields
+        if (this.state.company === '' || this.state.jobTitle === '') {
+            alert("Please fill in all fields!");
+        } else {
+            this.toggle();
+            this.props.sendState(this.state);
         }
     }
 
@@ -33,17 +58,32 @@ export default class AddApplicationModal extends React.Component {
                     <ModalBody>
                         <Form>
                             <FormGroup>
+                                <Label for='jobTitle'>Job Title</Label>
+                                <Input type='name' name='jobTitle' id='jobTitle' onChange={this.onChangeHandler}/>
+                            </FormGroup>
+                            <FormGroup>
                                 <Label for='companyName'>Company</Label>
                                 <Input type='name' name='company' id='companyName' onChange={this.onChangeHandler}/>
                             </FormGroup>
                             <FormGroup>
-                                <Label for='jobTitle'>Job Title</Label>
-                                <Input type='name' name='jobTitle' id='jobTitle' onChange={this.onChangeHandler}/>
+                                <Label for='notes'>Notes</Label>
+                                <Input type='textarea' name='notes' id='notes' onChange={this.onChangeHandler}/>
+                                <FormText>Pay, duties, location, recruiter information, etc.</FormText>
+                            </FormGroup>
+                            <FormGroup>
+                                <Label for='status'>Status</Label>
+                                <Input type='select' name='status' id='status' onChange={this.onChangeHandler}>
+                                    <option>In Review</option>
+                                    <option>Interview</option>
+                                    <option>Offered</option>
+                                    <option>Rejected</option>
+                                    <option>Withdrawn</option>
+                                </Input>
                             </FormGroup>
                         </Form>
                     </ModalBody>
                     <ModalFooter>
-                        <Button color="success" onClick={() => {this.toggle()}}>Add Application</Button>{' '}
+                        <Button color="success" onClick={() => {this.validateForm()}}>Add Application</Button>{' '}
                         <Button color="danger" onClick={() => this.toggle()}>Cancel</Button>
                     </ModalFooter>
                 </Modal>
