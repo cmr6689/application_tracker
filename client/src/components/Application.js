@@ -13,24 +13,23 @@ export default class Application extends React.Component {
         this.updateStatus = this.updateStatus.bind(this);
     }
 
-    call() {
+    async call() {
         const putBody = {
             username: this.props.username,
             jobTitle: this.props.applicationInformation.jobTitle,
             company: this.props.applicationInformation.company
         }
-        fetch("http://localhost:9000/api/removeApplication", {
+        await fetch("http://localhost:9000/api/removeApplication", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(putBody)
-        })
-            .then(req => req.json());
+        });
     }
 
-    deleteApplication() {
-        this.call();
+    async deleteApplication() {
+        await this.call();
         this.props.update();
     }
 

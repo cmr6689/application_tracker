@@ -42,21 +42,19 @@ export default class RegisterModal extends React.Component {
             });
     }
 
-    addUser() {
+    async addUser() {
         const putBody = {
             username: this.state.username,
             email: this.state.email,
             password: this.state.password
         }
-        console.log(JSON.stringify(putBody));
-        fetch("http://localhost:9000/api/addUser", {
+        await fetch("http://localhost:9000/api/addUser", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(putBody)
-        })
-            .then(req => req.json())
+        });
     }
 
     componentDidMount() {
@@ -81,7 +79,7 @@ export default class RegisterModal extends React.Component {
         }
     }
 
-    validateForm() {
+    async validateForm() {
         let valid = 0;
         //Check for blank fields
         if (this.state.email === '' || this.state.username === '') {
@@ -123,8 +121,8 @@ export default class RegisterModal extends React.Component {
         }
         //All fields valid
         if (valid === 4) {
-            this.addUser();
             this.toggle();
+            await this.addUser();
             this.props.sendUsername(this.state.username);
             this.props.showComponent("signedIn");
         }

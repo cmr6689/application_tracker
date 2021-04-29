@@ -50,26 +50,25 @@ export default class StatusModal extends React.Component {
         }
     }
 
-    callAPI(name) {
+    async callAPI(name) {
         const putBody = {
             status: name,
             username: this.props.applicationInformation.username,
             jobTitle: this.props.applicationInformation.jobTitle,
             company: this.props.applicationInformation.company
         }
-        fetch("http://localhost:9000/api/updateStatus", {
+        await fetch("http://localhost:9000/api/updateStatus", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(putBody)
-        })
-            .then(req => req.json());
+        });
     }
 
-    updateStatus(name) {
+    async updateStatus(name) {
         this.toggle();
-        this.callAPI(name);
+        await this.callAPI(name);
         this.props.updateStatus();
     }
 

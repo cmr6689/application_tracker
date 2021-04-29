@@ -17,7 +17,7 @@ export default class AddApplicationModal extends React.Component {
         this.setState({modal: !this.state.modal});
     }
 
-    addApplication() {
+    async addApplication() {
         const putBody = {
             username: this.props.username,
             jobTitle: this.state.jobTitle,
@@ -25,15 +25,14 @@ export default class AddApplicationModal extends React.Component {
             notes: this.state.notes,
             status: this.state.status
         }
-        console.log(JSON.stringify(putBody));
-        fetch("http://localhost:9000/api/addApplication", {
+        await fetch("http://localhost:9000/api/addApplication", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(putBody)
-        })
-            .then(req => req.json());
+        });
+        this.props.update();
     }
 
     onChangeHandler = (event) => {
@@ -57,14 +56,13 @@ export default class AddApplicationModal extends React.Component {
         }
     }
 
-    validateForm() {
+    async validateForm() {
         //Check for blank fields
         if (this.state.company === '' || this.state.jobTitle === '') {
             alert("Please fill in all fields!");
         } else {
             this.toggle();
-            this.addApplication();
-            this.props.update();
+            await this.addApplication();
         }
     }
 
