@@ -10,6 +10,7 @@ export default class Application extends React.Component {
             status: ''
         }
         this.deleteApplication = this.deleteApplication.bind(this);
+        this.updateStatus = this.updateStatus.bind(this);
     }
 
     call() {
@@ -33,6 +34,10 @@ export default class Application extends React.Component {
         this.props.update();
     }
 
+    updateStatus() {
+        this.props.update();
+    }
+
     render() {
         return (
             <div className='application'>
@@ -43,7 +48,7 @@ export default class Application extends React.Component {
                 <div style={{textAlign: 'left'}}>
                     <span style={{textAlign: 'left'}}>{this.props.applicationInformation.notes}</span>
                     <br /><br />
-                    <StatusModal status={this.props.applicationInformation.status} updateStatus={this.updateStatus}/>
+                    <StatusModal applicationInformation={this.props.applicationInformation} updateStatus={this.updateStatus}/>
                 </div>
                 <RemoveApplicationModal deleteApplication={this.deleteApplication} />
             </div>

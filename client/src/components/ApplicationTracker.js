@@ -33,7 +33,7 @@ export default class ApplicationTracker extends React.Component {
 
     update() {
         this.setState({applications: []});
-        setTimeout(() => this.callAPI(), 100);
+        setTimeout(() => this.callAPI(), 5000);
     }
 
     render() {
