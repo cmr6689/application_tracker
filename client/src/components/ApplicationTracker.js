@@ -13,6 +13,24 @@ export default class ApplicationTracker extends React.Component {
         this.addApplication = this.addApplication.bind(this);
     }
 
+    callAPI() {
+        fetch("http://localhost:9000/api/applications")
+            .then(res => res.json())
+            .then(data => {
+                for (const app of data.data) {
+                    if (app.username === this.props.username) {
+                        this.setState({
+                            applications: [...this.state.applications, <Application applicationInformation={app} />],
+                        });
+                    }
+                }
+            });
+    }
+
+    componentDidMount() {
+        this.callAPI();
+    }
+
     addApplication(state) {
         this.setState({
             applications: [...this.state.applications, <Application applicationInformation={state} />],
