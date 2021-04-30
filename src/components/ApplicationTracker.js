@@ -1,7 +1,8 @@
 import React from 'react';
 import AddApplicationModal from "./AddApplicationModal";
 import Application from "./Application";
-
+import firebase from "firebase/app";
+import 'firebase/firestore';
 export default class ApplicationTracker extends React.Component {
 
     constructor(props) {
@@ -13,27 +14,25 @@ export default class ApplicationTracker extends React.Component {
         this.update = this.update.bind(this);
     }
 
-    callAPI() {
-        fetch("https://application-tracker-cmr6689.web.app/api/applications")
-            .then(res => res.json())
-            .then(data => {
-                for (const app of data.data) {
-                    if (app.username === this.props.username) {
-                        this.setState({
-                            applications: [...this.state.applications, <Application applicationInformation={app} username={this.props.username} update={this.update} />],
-                        });
-                    }
-                }
+    async componentDidMount() {
+        await this.callAPI();
+    }
+
+    async callAPI() {
+        await firebase.firestore().collection("applications")
+            .where('username', '==', this.props.username)
+            .get().then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                this.setState({
+                    applications: [...this.state.applications, <Application applicationInformation={doc.data()} username={this.props.username} update={this.update} />],
+                });
             });
+        });
     }
 
-    componentDidMount() {
-        this.callAPI();
-    }
-
-    update() {
+    async update() {
         this.setState({applications: []});
-        this.callAPI();
+        await this.callAPI()
     }
 
     render() {

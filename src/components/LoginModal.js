@@ -10,6 +10,8 @@ import {
     Label,
     ModalHeader,
 } from 'reactstrap';
+import firebase from "firebase/app";
+import 'firebase/firestore';
 
 export default class LoginModal extends React.Component {
     usernames = [];
@@ -23,21 +25,6 @@ export default class LoginModal extends React.Component {
             password: '',
             initial: true
         }
-    }
-
-    callAPI() {
-        fetch("https://application-tracker-cmr6689.web.app/api/users")
-            .then(res => res.json())
-            .then(data => {
-                for (const user of data.data) {
-                    this.usernames.push(user.username);
-                    this.passwords.push(user.password);
-                }
-            });
-    }
-
-    componentDidMount() {
-        this.callAPI();
     }
 
     toggle() {
@@ -59,20 +46,16 @@ export default class LoginModal extends React.Component {
             alert("Please fill in all fields!");
             return;
         }
-        let valid = false;
-        let iterator = 0;
-        while (iterator < this.usernames.length) {
-            if (this.usernames[iterator] === this.state.username && this.passwords[iterator] === this.state.password) {
-                valid = true;
-                this.toggle();
-                this.props.sendUsername(this.state.username);
-                this.props.showComponent('signedIn');
-            }
-            iterator++;
-        }
-        if (!valid) {
-            alert('Username or password is incorrect');
-        }
+        firebase.firestore().collection('users').doc(this.state.username)
+            .get().then((doc) => {
+                if (doc.exists && doc.data().password === this.state.password) {
+                    this.toggle();
+                    this.props.sendUsername(this.state.username);
+                    this.props.showComponent('signedIn');
+                } else {
+                    alert('Username or password is incorrect');
+                }
+            });
     }
 
     render() {

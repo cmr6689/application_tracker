@@ -1,5 +1,7 @@
 import React from 'react';
 import {Button, Form, FormGroup, FormText, Input, Label, Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap";
+import firebase from "firebase/app";
+import 'firebase/firestore';
 
 export default class AddApplicationModal extends React.Component {
     constructor(props) {
@@ -18,20 +20,15 @@ export default class AddApplicationModal extends React.Component {
     }
 
     async addApplication() {
-        const putBody = {
+        let name = this.props.username;
+        let docTitle = name.concat(this.state.jobTitle, this.state.company);
+        await firebase.firestore().collection("applications").doc(docTitle).set({
             username: this.props.username,
             jobTitle: this.state.jobTitle,
             company: this.state.company,
             notes: this.state.notes,
             status: this.state.status
-        }
-        await fetch("https://application-tracker-cmr6689.web.app/api/addApplication", {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(putBody)
-        });
+        })
     }
 
     onChangeHandler = (event) => {

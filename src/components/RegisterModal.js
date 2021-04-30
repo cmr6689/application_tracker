@@ -11,54 +11,39 @@ import {
     ModalHeader,
     FormFeedback, FormText
 } from 'reactstrap';
-
+import firebase from "firebase/app";
+import 'firebase/firestore';
 export default class RegisterModal extends React.Component {
-    usernames = [];
-    emails = [];
 
     constructor(props) {
         super(props);
         this.state = {
             modal: false,
-            email: '',
             username: '',
             password: '',
             confirmPass: '',
-            emailTaken: false,
             usernameTaken: false,
             passwordNotSecure: false,
             passwordsDifferent: false,
         }
     }
 
-    callAPI() {
-        fetch("https://application-tracker-cmr6689.web.app/api/users")
-            .then(res => res.json())
-            .then(data => {
-                for (const user of data.data) {
-                    this.usernames.push(user.username);
-                    this.emails.push(user.email);
+    async checkUsername() {
+        await firebase.firestore().collection('users').doc(this.state.username)
+            .get().then((doc) => {
+                if (doc.exists) {
+                    this.setState({usernameTaken: true});
+                } else {
+                    this.setState({usernameTaken: false});
                 }
-            });
+        })
     }
 
     async addUser() {
-        const putBody = {
+        await firebase.firestore().collection("users").doc(this.state.username).set({
             username: this.state.username,
-            email: this.state.email,
             password: this.state.password
-        }
-        await fetch("https://application-tracker-cmr6689.web.app/api/addUser", {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(putBody)
-        });
-    }
-
-    componentDidMount() {
-        this.callAPI();
+        })
     }
 
     toggle() {
@@ -80,47 +65,27 @@ export default class RegisterModal extends React.Component {
     }
 
     async validateForm() {
-        let valid = 0;
         //Check for blank fields
-        if (this.state.email === '' || this.state.username === '') {
+        if (this.state.username === '') {
             alert("Please fill in all fields!");
             return;
         }
-        //Check for valid email address
-        if (!this.state.email.includes('@') || !this.state.email.includes('.')) {
-            alert("Please enter a valid email address.");
-            return;
-        }
-        //Check if email already registered
-        if (this.emails.includes(this.state.email)) {
-            this.setState({emailTaken: true});
-        } else {
-            this.setState({emailTaken: false});
-            valid++;
-        }
         //Check if username available
-        if (this.usernames.includes(this.state.username)) {
-            this.setState({usernameTaken: true});
-        } else {
-            this.setState({usernameTaken: false});
-            valid++;
-        }
+        await this.checkUsername();
         //Check if password is long enough
         if (this.state.password.length < 8) {
             this.setState({passwordNotSecure: true});
         } else {
             this.setState({passwordNotSecure: false});
-            valid++;
         }
         //Check matching passwords
         if (this.state.confirmPass !== this.state.password) {
             this.setState({passwordsDifferent: true});
         } else {
             this.setState({passwordsDifferent: false});
-            valid++;
         }
         //All fields valid
-        if (valid === 4) {
+        if (this.state.usernameTaken === false && this.state.passwordNotSecure === false && this.state.passwordsDifferent === false) {
             this.toggle();
             await this.addUser();
             this.props.sendUsername(this.state.username);
@@ -137,20 +102,6 @@ export default class RegisterModal extends React.Component {
                     <ModalHeader>Create an Account</ModalHeader>
                     <ModalBody>
                         <Form>
-                            {!this.state.emailTaken && (
-                                <FormGroup>
-                                    <Label for='registerEmail'>Email Address</Label>
-                                    <Input type='email' name='email' id='registerEmail' onChange={this.onChangeHandler} />
-                                </FormGroup>
-                            )}
-
-                            {this.state.emailTaken && (
-                                <FormGroup>
-                                    <Label for='registerEmail'>Email Address</Label>
-                                    <Input invalid type='email' name='email' id='registerEmail' defaultValue={this.state.email} onChange={this.onChangeHandler} />
-                                    <FormFeedback invalid>Email already registered, please login.</FormFeedback>
-                                </FormGroup>
-                            )}
                             {!this.state.usernameTaken && (
                                 <FormGroup>
                                     <Label for='registerUsername'>Username</Label>

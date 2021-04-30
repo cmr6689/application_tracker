@@ -1,6 +1,7 @@
 import React from 'react';
 import {Button, Modal, ModalBody, ModalHeader} from "reactstrap";
-
+import firebase from "firebase/app";
+import 'firebase/firestore';
 export default class StatusModal extends React.Component {
 
     constructor(props) {
@@ -51,18 +52,17 @@ export default class StatusModal extends React.Component {
     }
 
     async callAPI(name) {
-        const putBody = {
-            status: name,
-            username: this.props.applicationInformation.username,
-            jobTitle: this.props.applicationInformation.jobTitle,
-            company: this.props.applicationInformation.company
-        }
-        await fetch("https://application-tracker-cmr6689.web.app/api/updateStatus", {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(putBody)
+        let username = this.props.applicationInformation.username;
+        const path = username.concat(this.props.applicationInformation.jobTitle, this.props.applicationInformation.company);
+        const docRef = firebase.firestore().collection("applications").doc(path);
+        return firebase.firestore().runTransaction((transaction) => {
+            return transaction.get(docRef).then((doc) => {
+                if (!doc.exists) {
+                    throw "Document does not exist!";
+                } else {
+                    transaction.update(docRef, {status: name});
+                }
+            });
         });
     }
 

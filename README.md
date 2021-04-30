@@ -1,8 +1,8 @@
 # Application Tracker
 
-This full-stack web application is used for tracking job applications.
+This React web application is used for tracking job applications and is hosted with Google Firebase.
 
-#### https://application-tracker-cmr6689.web.app/
+#### https://application-tracker-react.web.app/
 
 ---
 ## Functionality

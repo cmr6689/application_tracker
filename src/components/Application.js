@@ -1,7 +1,8 @@
 import React from 'react';
 import StatusModal from "./StatusModal";
 import RemoveApplicationModal from "./RemoveApplicationModal";
-
+import firebase from "firebase/app";
+import 'firebase/firestore';
 export default class Application extends React.Component {
 
     constructor(props) {
@@ -14,18 +15,9 @@ export default class Application extends React.Component {
     }
 
     async call() {
-        const putBody = {
-            username: this.props.username,
-            jobTitle: this.props.applicationInformation.jobTitle,
-            company: this.props.applicationInformation.company
-        }
-        await fetch("https://application-tracker-cmr6689.web.app/api/removeApplication", {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(putBody)
-        });
+        let username = this.props.applicationInformation.username;
+        let docTitle = username.concat(this.props.applicationInformation.jobTitle, this.props.applicationInformation.company);
+        await firebase.firestore().collection('applications').doc(docTitle).delete();
     }
 
     async deleteApplication() {
