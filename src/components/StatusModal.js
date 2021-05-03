@@ -58,7 +58,7 @@ export default class StatusModal extends React.Component {
         return firebase.firestore().runTransaction((transaction) => {
             return transaction.get(docRef).then((doc) => {
                 if (!doc.exists) {
-                    throw "Document does not exist!";
+                    throw new Error("Document does not exist!");
                 } else {
                     transaction.update(docRef, {status: name});
                 }

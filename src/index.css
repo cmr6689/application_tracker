@@ -64,6 +64,7 @@ body {
   margin-bottom: 1em;
   padding-top: 2em;
   padding-bottom: 2em;
+  overflow: auto;
 }
 
 .application > * {
@@ -73,6 +74,18 @@ body {
 
 .application span {
   align-self: flex-start;
+}
+
+.application .left {
+  width: 48%;
+  overflow-wrap: break-word;
+}
+
+.application .right {
+  position: absolute;
+  left: 50%;
+  width: 45%;
+  overflow-wrap: break-word;
 }
 
 .application .deleteApplication {

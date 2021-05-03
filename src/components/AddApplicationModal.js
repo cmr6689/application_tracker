@@ -10,6 +10,7 @@ export default class AddApplicationModal extends React.Component {
             modal: false,
             company: '',
             jobTitle: '',
+            location: '',
             notes: '',
             status: 'In Review'
         }
@@ -26,6 +27,7 @@ export default class AddApplicationModal extends React.Component {
             username: this.props.username,
             jobTitle: this.state.jobTitle,
             company: this.state.company,
+            location: this.state.location,
             notes: this.state.notes,
             status: this.state.status
         })
@@ -40,6 +42,9 @@ export default class AddApplicationModal extends React.Component {
                 break;
             case 'jobTitle':
                 this.setState({jobTitle: input});
+                break;
+            case 'location':
+                this.setState({location: input});
                 break;
             case 'notes':
                 this.setState({notes: input});
@@ -79,6 +84,10 @@ export default class AddApplicationModal extends React.Component {
                             <FormGroup>
                                 <Label for='companyName'>Company</Label>
                                 <Input type='name' name='company' id='companyName' onChange={this.onChangeHandler}/>
+                            </FormGroup>
+                            <FormGroup>
+                                <Label for='location'>Location</Label>
+                                <Input type='name' name='location' id='location' onChange={this.onChangeHandler}/>
                             </FormGroup>
                             <FormGroup>
                                 <Label for='notes'>Notes</Label>

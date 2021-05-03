@@ -32,11 +32,12 @@ export default class Application extends React.Component {
     render() {
         return (
             <div className='application'>
-                <div style={{textAlign: 'left'}}>
+                <div className='left' style={{textAlign: 'left'}}>
                     <h4>{this.props.applicationInformation.jobTitle}</h4>
                     <h5 className='text-muted'>{this.props.applicationInformation.company}</h5>
+                    <h6 className='text-muted'>{this.props.applicationInformation.location}</h6>
                 </div>
-                <div style={{textAlign: 'left'}}>
+                <div className='right' style={{textAlign: 'left'}}>
                     <span style={{textAlign: 'left'}}>{this.props.applicationInformation.notes}</span>
                     <br /><br />
                     <StatusModal applicationInformation={this.props.applicationInformation} updateStatus={this.updateStatus}/>

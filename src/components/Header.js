@@ -3,17 +3,14 @@ import {Button} from "reactstrap";
 import ApplicationTracker from "./ApplicationTracker";
 import LoginModal from "./LoginModal";
 import RegisterModal from "./RegisterModal";
-import firebase from 'firebase';
+import firebase from 'firebase/app';
 
 const firebaseConfig = {
-    //removed for privacy
+    //
 };
 
-if (window.location.hostname === 'localhost') {
-    firebase.firestore().useEmulator('localhost', 5000);
-} else {
-    firebase.initializeApp(firebaseConfig);
-}
+firebase.initializeApp(firebaseConfig);
+//firebase.firestore().useEmulator('localhost', 8080);
 
 export default class Header extends React.Component {
 
