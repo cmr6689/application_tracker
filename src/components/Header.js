@@ -10,6 +10,8 @@ const firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
+
+//Emulator testing purposes
 //firebase.firestore().useEmulator('localhost', 8080);
 
 export default class Header extends React.Component {

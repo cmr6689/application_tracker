@@ -65,6 +65,8 @@ export default class RegisterModal extends React.Component {
     }
 
     async validateForm() {
+        this.setState({passwordNotSecure: false});
+        this.setState({passwordsDifferent: false});
         //Check for blank fields
         if (this.state.username === '') {
             alert("Please fill in all fields!");
