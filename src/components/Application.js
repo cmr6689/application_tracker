@@ -3,6 +3,7 @@ import StatusModal from "./StatusModal";
 import RemoveApplicationModal from "./RemoveApplicationModal";
 import firebase from "firebase/app";
 import 'firebase/firestore';
+import EditApplicationModal from "./EditApplicationModal";
 export default class Application extends React.Component {
 
     constructor(props) {
@@ -43,6 +44,7 @@ export default class Application extends React.Component {
                     <StatusModal applicationInformation={this.props.applicationInformation} updateStatus={this.updateStatus}/>
                 </div>
                 <RemoveApplicationModal deleteApplication={this.deleteApplication} />
+                <EditApplicationModal update={this.updateStatus} applicationInformation={this.props.applicationInformation} username={this.props.username}/>
             </div>
         )
     }

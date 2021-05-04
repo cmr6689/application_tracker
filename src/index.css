@@ -96,3 +96,20 @@ body {
   right: 0;
   top: 0;
 }
+
+.application .editApplication {
+  margin-right: 1em;
+  margin-bottom: 1em;
+}
+
+.editApplication {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  color: white;
+  background-color: black;
+}
+
+.editApplication:hover {
+  background-color: #333333;
+}
